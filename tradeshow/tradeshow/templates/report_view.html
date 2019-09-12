@@ -1,0 +1,68 @@
+<center><h1>Reports</h1></center>
+<hr />
+<center>
+<b>Tradeshow : </b>
+<select class="selectpicker" name="tradeshow" id="tradeshow">
+    <option value="-1">--Select Tradeshow--</option>
+    {% for tradeshow in tradeshows %}
+        <option value="{{tradeshow.id}}">{{tradeshow.name}}</option>
+    {% endfor %} 
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="" value="View Reports" onClick="getReportsData()"/>
+</center>
+<hr />
+<div class="container" id="allReports" style="padding:50px">
+
+    <!--b>Exhibitor : DLF </b>
+    <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+    </table-->
+</div>
+<br/>
+<script>
+
+function getReportsData() {
+    var tradeshowID = $('#tradeshow option:selected').val();
+    if (tradeshowID == "-1") {
+        console.log("Please select Tradreshow.");
+        alert("Please select Tradreshow.");
+    } else {
+        console.log("Tradeshow selected.");
+        var server = $(location).attr('host');
+        var api = "http://" + server + "/tsadmin/view/tradeshow/reports/";
+        var postData = {};
+        postData['csrfmiddlewaretoken'] = getCookie('csrftoken');
+        postData['tradeshowID'] = tradeshowID;
+        $.post( api, postData)
+          .done(function( response ) {
+            $("#allReports").html(response);
+        });
+    }
+}
+
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+

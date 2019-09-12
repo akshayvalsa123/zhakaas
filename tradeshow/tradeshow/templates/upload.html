@@ -1,0 +1,67 @@
+<!--html>
+<head></head>
+<body>
+  <form action="" method="post" enctype="multipart/form-data">
+
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+  </form>
+</body>
+</html-->
+
+<div class="col-md-12">
+  <form id="importTS" action="" method="post" enctype="multipart/form-data">
+    <div class="importTradeshow">
+     <center><h1>Import Tradeshow</h1></center>
+     <hr />
+     {% csrf_token %}
+    <br/>
+          <div style="position:relative;">
+                <a class='btn btn-primary' href='javascript:;'>
+	                Choose File...
+	                <input id="tsFile" type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                </a>
+                &nbsp;
+                <span class='label label-info' id="upload-file-info"></span>
+            </div>
+    </div>
+    <br/>
+    <br/>
+    <div>
+    </div>
+    <input class="upload-button" type="button" name="Upload" value="Upload" onClick="importTradeshow()"/>
+    </form>
+    <br/>
+    <div id="importMessage">
+    </div>
+</div>
+
+
+<script>
+function importTradeshow() {
+
+var formData = new FormData();
+formData.append('file', $('#tsFile')[0].files[0]);
+formData.append('csrfmiddlewaretoken', $('[name="csrfmiddlewaretoken"]').val());
+var server = $(location).attr('host');
+var api = 'http://' + server + '/tsadmin/import/tradeshow/';
+$.ajax({
+       url : api,
+       type : 'POST',
+       data : formData,
+       processData: false,  // tell jQuery not to process the data
+       contentType: false,  // tell jQuery not to set contentType
+       success : function(response) {
+            $("#importMessage").removeClass();
+            if (response.responseHeader.status === 0) {
+                $("#importMessage").addClass('success');
+            } else {
+                $("#importMessage").addClass('error');
+            }
+           $("#importMessage").html(response.response.message); 
+       }
+});
+
+
+}
+</script>

@@ -1,0 +1,19 @@
+<b>Exhibitor : {{exhibitor.name}} </b>
+<br/>
+<br/>
+<table id="exDataTable" class="display" cellspacing="0" width="100%">
+        <thead>            
+            <tr>
+                <th></th>
+                {% for fieldMapping in fieldsMapping %}
+                    <th>{{fieldMapping.fieldDisplayName}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+</table>
+<br/>
+<input type="button" value="Delete Selected Records" onClick="deleteRecords('selected')"/>
+<input type="button" value="Delete All Records" onClick="deleteRecords('all')"/>
+<br/>
+<br/>
+<a href="{{csvLink}}" class="btn" role="button">Download CSV</a>

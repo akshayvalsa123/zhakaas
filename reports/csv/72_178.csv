@@ -1,0 +1,10 @@
+First Name,Last Name,Email,Contact Number,Address,Company,City,BadgeID,Capture Time,Lead Type,Scan Type,Interest and Actions#Send Information,Interest and Actions#Need Technical Data,Interest and Actions#Add to Mailing List,Interest and Actions#Just Invesigation,Interest and Actions#Send Quote,Interest and Actions#Ready to purchase,Interest and Actions#Decision Maker,Interest and Actions#Have Rep Call
+Nitin,Kumar,Jx@jjdi.diid,Jdjd,,,,,2017-12-26 13:03:48+00:00,Hot,Manual,1,1,0,0,0,0,0,0
+Amol,Bhagwat,Amol@gmail.com,929198181818,,,,,2017-12-26 13:05:39+00:00,Hot,Manual,0,1,0,0,0,0,0,0
+Sachin,Tendulkar,sachin@gmail.com,7788990066,,,,387437,2017-12-26 13:14:55+00:00,Hot,BarcodeScan,0,1,0,0,0,0,0,0
+John,Adam,john@gmail.com,7788990066,,,,384637,2017-12-26 13:15:13+00:00,Hot,BarcodeScan,1,1,1,1,0,0,0,0
+Virat,Kohli,virat@gmail.com,7788990066,,,,38747987,2017-12-26 13:16:48+00:00,Hot,BarcodeScan,1,1,1,0,0,0,0,0
+Saifali,Khan,saif@gmail.com,99887766,,,,5679,2017-12-26 13:17:13+00:00,Hot,BarcodeScan,1,1,0,0,0,0,0,0
+Katrina,Kaif,kat@gmail.com,99887766,,,,5679,2017-12-26 13:17:22+00:00,Warm,BarcodeScan,0,0,0,0,0,0,1,1
+Katrina,Kaif,kat@gmail.com,99887766,,,,5679,2017-12-26 13:17:22+00:00,Warm,BarcodeScan,0,0,0,0,0,0,1,1
+Jaja,Hsua,Bsj@hdjs.jdj,Hdjd,,,,,2017-12-26 14:45:54+00:00,Hot,Manual,0,1,0,0,0,0,0,0

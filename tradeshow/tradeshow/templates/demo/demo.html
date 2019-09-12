@@ -1,0 +1,45 @@
+<head>
+{% load staticfiles %}
+
+<title>Exhibiz Demo</title>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+<style>
+body {
+  padding-top: 65px;
+}
+.logo_text {
+    color:white;
+    vertical-align:middle;
+}
+</style>
+</head>
+<body>
+<div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+          <li><a href="#"><img src="/static/logo.png" width="30" height="30"/> &nbsp;&nbsp;<span class="lead logo_text">EXHIBIZ</span></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+</div><!--/.navbar -->
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTdDIv7ZW-CcI7bY4AzD7QNLXoaw1XQHhzG6vtZ9olv3UdAlxE151h6ijxoVeJQXhFbL5uIzIwQBNpo/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+</div>
+</body>
+

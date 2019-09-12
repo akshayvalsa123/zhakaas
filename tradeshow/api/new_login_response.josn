@@ -1,0 +1,126 @@
+{
+	"responseHeader": {
+		"status": 0
+	},
+	"response": {
+		"tradeshowInfo": {
+			"website": "",
+			"tradeshowID": 57,
+			"endDate": "2017-09-01T12:30:00Z",
+			"name": "Pune Auto Expo",
+			"startDate": "2017-09-01T04:30:00Z",
+			"industry": "",
+			"adminPassword": "admin",
+			"sponsors": "",
+			"contactNo": "9623394971",
+			"nameCode": null,
+			"address": "Hotel Novotel, Pune 411014, Maharashtra, India",
+			"timeZone": "",
+			"supportMessage": "",
+			"email": "puneauto@tradeshow.com"
+		},
+		"exhibitorInfo": {
+			"name": "Maruti",
+			"alternateEmail": "",
+			"licenseCount": 1,
+			"contactNo": "9623394974",
+			"address": "Maruti Showroom, Pune 411014, Maharashtra, India",
+			"exhibitorID": 141,
+			"email": "maruti@tradeshow.com"
+		},
+		"settings": {
+			"total": 6,
+			"data": [{
+				"settingDefaultvalue": null,
+				"settingValue": "manual",
+				"settingName": "scanType",
+				"settingType": "text"
+			}, {
+				"settingDefaultvalue": null,
+				"settingValue": "known",
+				"settingName": "mapping",
+				"settingType": "text"
+			}, {
+				"settingDefaultvalue": null,
+				"settingValue": "$",
+				"settingName": "delimeter",
+				"settingType": "text"
+			}, {
+				"settingDefaultvalue": null,
+				"settingValue": "#",
+				"settingName": "skipCharacter",
+				"settingType": "text"
+			}, {
+				"settingDefaultvalue": null,
+				"settingValue": "firstname,lastname,email,contactNo",
+				"settingName": "validateField",
+				"settingType": "text"
+			}, {
+				"settingDefaultvalue": null,
+				"settingValue": "on",
+				"settingName": "QLS",
+				"settingType": "text"
+			}]
+		},
+		"fields": {
+			"total": 6,
+			"data": [{
+				"fieldSeq": 1,
+				"fieldDisplayName": "BadgeID",
+				"fieldName": "badgeID"
+			}, {
+				"fieldSeq": 2,
+				"fieldDisplayName": "Badge Data",
+				"fieldName": "badgeData"
+			}, {
+				"fieldSeq": 3,
+				"fieldDisplayName": "First Name",
+				"fieldName": "firstName"
+			}, {
+				"fieldSeq": 4,
+				"fieldDisplayName": "Last Name",
+				"fieldName": "lastName"
+			}, {
+				"fieldSeq": 5,
+				"fieldDisplayName": "Email",
+				"fieldName": "email"
+			}, {
+				"fieldSeq": 6,
+				"fieldDisplayName": "Contact Number",
+				"fieldName": "contactNo"
+			}]
+		},
+		"message": "",
+		"qualifiers": {
+			"total": 1,
+			"data": [{
+				"qualifierType": "basic",
+				"total": 1,
+				"data": [{
+					"qualifierName": "General",
+					"screenNo": 1,
+					"questions": [{
+						"qualifierQuestionID": 404,
+						"widget": "Spinner",
+						"question": "Fuel Type",
+						"option": "Petrol,Disel,CNG,Electric",
+						"seq": 1
+					}, {
+						"qualifierQuestionID": 407,
+						"widget": "Spinner",
+						"question": "Body Type",
+						"option": "HatchBack,Sedan,Compact Sedan,SUV/MUV",
+						"seq": 2
+					}, {
+						"qualifierQuestionID": 410,
+						"widget": "Spinner",
+						"question": "Budget",
+						"option": "4L,4-8L,8-12L,12-25L,25L+",
+						"seq": 3
+					}],
+					"totalQuestions": 3
+				}]
+			}]
+		}
+	}
+}

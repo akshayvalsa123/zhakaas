@@ -1,0 +1,34 @@
+<html>
+    <head>
+    <style>
+        .reportHeader {
+            border: 1px solid black;
+            width: 75%;
+            background: #f1f1f1;
+        }
+    </style>
+    </head>
+    <body>
+        <center>
+            <h2>{{tradeshow.name}}</h2>
+            </center>
+            <hr/>
+            <div><h2>Exhibitor: {{exhibitor.name}}</h2>
+            <h2>Total Leads : {{leadCount}}</h2>
+            </div>
+            <center>
+            {% for report in reports %}
+                <div class="reportHeader"><h3>{{report.name}}</h3></div>
+                <br/>
+                <img src="{{report.image}}"></img>
+              
+                <p style="page-break-before: always"/>
+            {% endfor %}
+            <!--img src="Lead_Finance_Stats_1.png"></img>
+            <h3>Lead Finance Stats 02</h3>
+            <img src="Lead_Finance_Stats_1.png"></img>
+            <h3>Lead Finance Stats 03</h3>
+            <img src="Lead_Finance_Stats_1.png"></img-->
+        </center>
+    </body>
+</html>

@@ -1,0 +1,181 @@
+<center><h1>Leads</h1></center>
+<hr />
+<center>
+<b>Tradeshow : </b>
+<select class="selectpicker" name="tradeshow" id="tradeshow" onChange="updateExhibitors(this)">
+    <option value="-1">--Select Tradeshow--</option>
+    {% for tradeshow in tradeshows %}
+        <option value="{{tradeshow.id}}">{{tradeshow.name}}</option>
+    {% endfor %} 
+</select>
+<b>Exhibitor : </b>
+
+<select class="selectpicker" name="exhibitor" id="exhibitor">
+    <option value="-1">--Select Exhibitor--</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="" value="View Leads" onClick="getLeadsData()"/>
+</center>
+<hr />
+<div id="allLeads" style="padding:50px">
+    <!--b>Exhibitor : DLF </b>
+    <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+    </table-->
+</div>
+<center>
+<div id="deleteMessage">
+<br/>
+<br/>
+<span class="successMessage" style="color:green"></span>
+<br/>
+<span class="errorMessage" style="color:red" ></span>
+</div>
+<br/>
+</center>
+<script>
+function updateExhibitors(e) {
+var tradeshowID = e.value;
+if (e.value === "-1") {
+    console.log("No tradehsow selected.");
+    return;
+} else {
+    console.log("Tradeshow selected.");
+    var server = $(location).attr('host');
+    var api = "http://" + server + "/tsadmin/get/tradeshow/exhibitors/";
+    var _api = api + "?tradeshowID=" + tradeshowID;
+    console.log("Calling api: " + _api);    
+    $.ajax({url: _api, success: _setExhibitors, cache: false});    
+    }
+}
+function _setExhibitors(response) {
+  var status = response.responseHeader.status;
+  console.log( "response status: " + status);
+  $('#exhibitor').find('option').not('[value=-1]').remove()
+  if (status == 0){
+    var exhibitors = response.response.exhibitors;
+    if (exhibitors.length > 1) {
+        //$('#exhibitor').append('<option value=0>All</option>');
+    }    
+    $.each(exhibitors, function (key, data) {
+        console.log(data);
+        $('#exhibitor').append('<option value=' + data[0] + '>' + data[1] + '</option>');
+    });
+
+  }
+}
+
+function getLeadsData() {
+    var tradeshowID = $('#tradeshow option:selected').val();
+    var exhibitorID = $('#exhibitor option:selected').val();
+    if (tradeshowID == "-1" || exhibitorID == "-1") {
+        console.log("Please select Tradreshow and Exhibitor.");
+        alert("Please select Tradreshow and Exhibitor.");
+    } else {
+        console.log("Tradeshow and Exhibitor selected.");
+        var server = $(location).attr('host');
+        var api = "http://" + server + "/api/get/tradeshow/leads/";
+        var _api = api + "?tradeshowID=" + tradeshowID + "&amp;exhibitorID=" + exhibitorID + "&amp;t=" + Date.now();
+        console.log("Calling api: " + _api);    
+        if ( $.fn.dataTable.isDataTable( '#exDataTable' ) ) {
+            table = $('#exDataTable').DataTable();
+            table.destroy();
+        }
+        var server = $(location).attr('host');
+        var templateAPI = "http://" + server + "/api/get/exhibitor/datatable/template/?tradeshowID=" + tradeshowID + "&amp;exhibitorID=" + exhibitorID + "&amp;t=" + Date.now();
+        console.log("templateAPI::" + templateAPI);
+        $.ajax({url: templateAPI, success: _setDataTableHeaders, cache: false, async: false});    
+         $('#exDataTable').DataTable( {
+                "serverSide": true,
+                "ajax": _api,
+                "columnDefs": [ {
+                     "targets": 0,
+                     "searchable":false,
+                     "orderable":false,
+                     "className": 'dt-body-center',
+                     "render": function (data, type, full, meta){
+                         return '<input type="checkbox" name="id[]" value="' 
+                            + $('<div/>').text(data).html() + '">';
+                     }
+                } ],
+                //"select": {
+                //    "style":    'multi',
+                //    "selector": 'td:first-child'
+                //},
+                "order": [[ 1, 'asc' ]]
+
+            } );
+    }
+   
+}
+
+function _setDataTableHeaders(response) {
+console.log(response);
+$("#allLeads").html(response);
+}
+
+function deleteRecords(deleteType) {
+    console.log("deleteType: "+ deleteType);
+    var server = $(location).attr('host');
+    var api = "http://" + server + "/api/delete/leads/";
+    var csrftoken = getCookie('csrftoken');
+    var selectedIDs = [];
+
+    if (deleteType == 'selected') {
+        $("#exDataTable").find("input:checked").each(function (i, ob) { 
+            selectedIDs.push($(ob).val());
+        });
+        message = 'Are you sure you want to delete ' +selectedIDs.length + ' selected leads ?';
+    } else {
+        var info = $('#exDataTable_info').text();
+        var _info= info.split(' ');
+        var count = _info[_info.length -2];
+        message = 'Are you sure you want to delete all ' + count + ' leads ?';
+    }
+    var selection = confirm(message);
+    console.log(selection);
+    if (!selection) {
+        return;
+    } 
+    var postData = {};
+    postData['csrfmiddlewaretoken'] = csrftoken;
+    postData['tradeshowID'] = $('#tradeshow option:selected').val();
+    postData['exhibitorID'] = $('#exhibitor option:selected').val();
+    postData['deleteType'] = deleteType;
+    postData['selectedIDs'] = selectedIDs.join(',');
+    $.post( api, postData)
+      .done(function( response ) {
+        if(response.responseHeader.status == 0) {
+            console.log("response:: " + response.responseHeader.status);
+            var html = "<b>" + response.response.message + "</b>";
+            $('.successMessage').html(html);
+        } else {
+            console.log("response:: " + response.responseHeader.status);
+            var html = "<b>" + response.response.message + "</b>";
+            $('.errorMessage').html(html);
+        }        
+      });
+}
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>

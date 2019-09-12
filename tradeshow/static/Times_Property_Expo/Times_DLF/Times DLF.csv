@@ -1,0 +1,11 @@
+First Name,Last Name,Email,Contact Number,BadgeID,Capture Time,Lead Type,Scan Type,Property#What is your locality preference ?,Property#Interested in under construction OR ready to move property ?,Property#Any preference for floor ?,Property#How many bedrooms ?,Property#Any preference for amenities ?,Finance#What is the purpose ?,Finance#What is your budget ?,Finance#How will be the finance ?,Finance#What is income range ?,Finance#How soon can be booked ?
+Debbie,Kakar,debbiekakar@hotmail.com,9465446254,QWI49,2017-09-01 06:45:15+00:00,cold,manual,Keshav Nagar,Under Construction,1st Floor,4,Power Backup,Investment,60-80L,Others,0-10L,In months time
+Anurag,Rana,anuragrana@yahoo.com,9926232764,DOUUS,2017-09-01 06:41:48+00:00,warm,manual,Keshav Nagar,Under Construction,Above 5th Floor,4,Swimming Pool,Living,1Cr+,Others,30L+,In weeks time
+"Raj,",Bhatti,"raj,bhatti@hotmail.com",9377744413,LV4AL,2017-09-01 08:07:05+00:00,warm,camera,Kharadi,Ready to Move,10th Floor,3.5,Power Backup,Living,1Cr+,Own Fund,10-20L,In months time
+Mohit,Contractor,mohitcontractor@hotmail.com,8138120076,ZN6XF,2017-09-01 10:43:56+00:00,cold,manual,Viman Nagar,Under Construction,10th Floor,1.5,Club house,Living,20-40L,Bank Loan,20-30L,In weeks time
+Krishna,Lalla,krishnalalla@yahoo.com,9701571530,FP62K,2017-09-01 09:59:33+00:00,hot,camera,Pashan,Ready to Move,1st Floor,2,Kids Play Area,Investment,60-80L,Others,10-20L,In months time
+Sasashy,Dyal,sasashydyal@msn.com,7101387732,06SAW,2017-09-01 04:59:06+00:00,hot,camera,Hinjewadi,Ready to Move,Above 5th Floor,2,Club house,Investment,60-80L,Bank Loan,30L+,In months time
+Naveen,Soni,naveensoni@msn.com,8472719310,BWIHW,2017-09-01 08:20:53+00:00,hot,camera,Sinhgad Road,Ready to Move,Top Floor,2,Swimming Pool,Investment,80-100L,Bank Loan,0-10L,In months time
+Shreya,Golla,shreyagolla@gmail.com,9244191797,SAS49,2017-09-01 05:36:13+00:00,cold,camera,Kharadi,Ready to Move,10th Floor,3,Power Backup,Living,40-60L,Own Fund,10-20L,In weeks time
+Deepak,Sangha,deepaksangha@yahoo.com,8192846659,ISRNH,2017-09-01 07:15:15+00:00,hot,camera,Keshav Nagar,Under Construction,2nd Floor,3,Kids Play Area,Investment,80-100L,Others,10-20L,In couple of months
+Neha,Guha,nehaguha@gmail.com,8207563276,GNA50,2017-09-01 07:16:35+00:00,cold,camera,Yerwada,Under Construction,3rd Floor,4,Power Backup,Investment,40-60L,Bank Loan,10-20L,In months time

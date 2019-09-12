@@ -1,0 +1,75 @@
+<div class="alert alert-danger" id="errorMessage">{{errorMessage}}</div>
+<div class="alert alert-success" id="successMessage"></div>
+<div>
+<form id="reportUrlsForm">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <p class="form-control-static"><b>Name</b></p>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-1">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <p class="form-control-static"><b>Sequence</b></p>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <p class="form-control-static"><b>Report URL</b></p>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <p class="form-control-static"><b>Description</b></p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    {% for reportUrl in reportUrls %}
+        <input type="hidden" id="id_{{reportUrl.id}}" value="{{reportUrl.id}}"/>
+        <div class="row">
+          <div class="col-sm-3">
+                <div class="">
+                    <input type="text" class="form-control" id="name_{{forloop.counter}}" value="{{reportUrl.name}}"/>
+                </div>
+          </div>
+          <div class="col-sm-1">
+                <div class="">
+                    <input type="text" class="form-control" id="seq_{{forloop.counter}}" value="{{reportUrl.seq}}"/>
+                </div>
+          </div>
+          <div class="col-sm-5">
+                <div class="">
+                    <textarea class="form-control" rows="5" id="url_{{forloop.counter}}" >{{reportUrl.url}}</textarea>
+                </div>
+          </div>
+
+          <div class="col-sm-3">
+                <div class="">    
+                    <textarea class="form-control" rows="5" id="description_{{forloop.counter}}" >{{reportUrl.description}}</textarea>
+                </div>
+          </div>
+        </div>
+    {% endfor %}
+    <hr/>
+        <div class="row text-center">
+            <button type="button" class="btn btn-primary btn-lg" onClick="saveReportUrls();">Save Report Urls</button>
+        </div>
+    </form>    
+</form>
+</div>
+<script>
+$('.alert').hide();
+if($('#errorMessage').html() != "") {
+    $('#errorMessage').show();
+}
+</script>

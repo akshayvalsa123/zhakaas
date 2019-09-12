@@ -1,0 +1,232 @@
+<head>
+{% load staticfiles %}
+
+<title>Tradeshow Admin</title>
+
+<!--script src="https://code.jquery.com/jquery-1.12.4.js"></script-->
+<script src="{% static 'tsadmin/js/jquery-1.12.4.js' %}"></script>
+
+<!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"-->
+<link rel="stylesheet" href="{% static 'tsadmin/css/bootstrap.min.css' %}">
+
+<!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"-->
+<link rel="stylesheet" href="{% static 'tsadmin/css/bootstrap-theme.min.css' %}">
+
+<!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script-->
+<script src="{% static 'tsadmin/js/bootstrap.min.js' %}"></script>
+
+<style>
+body,html,.row-offcanvas {
+  height:100%;
+}
+
+body {
+  padding-top: 65px;
+}
+.logo_text {
+    color:white;
+    vertical-align:middle
+}
+#sidebar {
+  width: inherit;
+  min-width: 220px;
+  max-width: 220px;
+  background-color:#f5f5f5;
+  float: left;
+  height:100%;
+  position:relative;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+#main {
+  height:100%;
+  overflow:auto;
+}
+
+/*
+ * off Canvas sidebar
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    width:calc(100% + 220px);
+  }
+
+  .row-offcanvas-left
+  {
+    left: -220px;
+  }
+
+  .row-offcanvas-left.active {
+    left: 0;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+  }
+}
+.upload-button {
+    width: 200px;
+    height: 50px;
+    font-size: large;
+    font-weight: bold;
+    background-color: #4086c3;
+    color: white;
+}
+.hide {
+display: none;
+}
+.show {
+display: block;
+}
+.success {
+color: green;
+display: block;
+}
+.error {
+color: red;
+display: block;
+}
+.div-centre {
+  width: 200px;
+  display: block;
+  background-color: #eee;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logout-button {
+margin: 12px;
+float:right;
+}
+</style>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+          <li><a href="#"><img src="{% static 'tsadmin/images/logo.png' %}" width="30" height="30"/> &nbsp;&nbsp;<span class="lead logo_text">EXHIBIZ</span></a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+
+</div><!--/.navbar -->
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class='col-md-3'></div>
+        <div class='col-md-6'>
+            <div class="alert alert-danger text-center" id="errorMessage"></div>
+        </div>
+        <div class='col-md-3'></div>
+    </div>
+    <div class="row">
+        <div class='col-md-4'></div>
+        <div class="col-md-4">
+            <div class="login-box well">
+                    <form action="" class="form-horizontal">
+                        {% csrf_token %}
+                        <h2 class="text-center">Login</h2>
+
+                        <div class="form-group">
+                            <label for="username" class="control-label col-xs-3">Username</label>
+                            <div class="col-xs-9">
+                                <input value='' id="username" placeholder="Username" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label col-xs-3">Password</label>
+                            <div class="col-xs-9">
+                                <input id="password" value='' placeholder="Password" type="password" class="form-control" />
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-xs-offset-4 col-xs-8">
+                                <button type="button" class="btn btn-primary btn-lg" onclick="doLogin();">Login</button>
+                            </div>
+
+
+                        </div>
+                    </form>
+
+            </div>
+        </div>
+        <div class='col-md-4'></div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('[data-toggle=offcanvas]').click(function() {
+    $('.row-offcanvas').toggleClass('active');
+  });
+  $('.alert').hide();
+    console.log('location ::' + $(location).attr('host'));
+});
+
+function doLogin() {
+
+    var username = $("#username").val().trim();
+    var password = $("#password").val().trim();
+
+    if( !(username && password)) {
+        alert("Username/Password cannot be empty.");
+        return;
+    }
+    var postData = {};
+    postData['username'] = username;
+    postData['password'] = password;
+    var server = $(location).attr('host');
+    var api = "http://" + server + "/tsadmin/login/";
+    var csrftoken = getCookie('csrftoken');
+    postData['csrfmiddlewaretoken'] = csrftoken;
+    console.log(postData);
+
+    $.post( api, postData)
+      .done(function( response ) {
+            console.log(response);
+            $('.alert').hide();
+            if (response.responseHeader.status != 0) {
+                $("#errorMessage").html(response.response.message);
+                $('.alert-danger').show();
+            } else {
+                var redirectURL = response.response.redirectURL;
+                window.location.replace(redirectURL);
+            }
+      });
+}
+
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+</body>
+

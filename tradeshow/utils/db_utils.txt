@@ -1,0 +1,27 @@
+MySQL Import
+
+# Get the dump of local database
+mysqldump -u dbadmin -p\!dbadmin tradeshow > /opt/projects/lead_management/databases/tradeshow_local_21_Oct_2017.sql
+
+# Copy the dump to server
+scp -i ~/.ssh/akshay-aws.pem  /opt/projects/lead_management/databases/tradeshow_local_21_Oct_2017.sql ubuntu@52.34.196.114:/opt/projects/lead_management/databases/
+
+# Get the dump for production db
+mysqldump -u dbadmin -p\!dbadmin tradeshow > /opt/projects/lead_management/databases/tradeshow_dev_21_Oct_2017.sql
+
+# Restore the database
+mysql -u dbadmin -p\!dbadmin tradeshow < /opt/projects/lead_management/databases/tradeshow_local_21_Oct_2017.sql
+
+
+
+CREATE USER 'dbadmin'@'localhost' IDENTIFIED BY '!dbadmin';
+GRANT ALL PRIVILEGES ON *.* TO 'dbadmin'@'localhost';
+FLUSH PRIVILEGES;
+
+========================
+Zip Unzip
+========================
+
+zip -r compressed_filename.zip foldername
+unzip compressed_filename.zip -d foldername
+

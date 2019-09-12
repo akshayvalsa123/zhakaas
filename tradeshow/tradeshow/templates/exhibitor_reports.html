@@ -1,0 +1,36 @@
+{% if message %}
+<span style="color:red"><b>{{message}}</b></span>
+{% endif %}
+{% if reportCount %}
+<b>Report Count :</b> {{reportCount}}
+{% endif %}
+
+<br/>
+<br/>
+{% if exhibitorReports %}
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Exhibitor</th>
+        <th>Report Status</th>
+        <th>View Report</th>
+        <th>PDF Report</th>
+        <th>CSV Report</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for exhibitorReport in exhibitorReports %}
+            <tr>
+                <td>{{exhibitorReport.exhibitorName}}</td>
+                <td>{{exhibitorReport.reportStatus}}</td>
+                <td><a href="{{exhibitorReport.reportLink}}" target="_blank">View Report</a></td>
+                <td><a href="{{exhibitorReport.pdfLink}}" class="btn btn-info" role="button">Download PDF</a></td>
+                <td><a href="{{exhibitorReport.csvLink}}" class="btn btn-info" role="button">Download CSV</a></td>
+                <!--td><input type="button" name="" value="Download PDF" onClick="downloadPDF()"/></td>
+                <td><input type="button" name="" value="Download CSV" onClick="downloadCSV()"/></td-->
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+{% endif %}
